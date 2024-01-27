@@ -1,0 +1,10 @@
+images:
+  - service_name: apigateway
+    server: https://docker.io
+    stable_version: "1.21.5"
+  - service_name: nginx
+    server: https://docker.io
+    stable_version: "1.24.0"
+  - service_name: metadata
+    server: https://docker.io
+    stable_version: "1.25.0"

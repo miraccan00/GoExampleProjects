@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/service-account-token
+metadata:
+  name: token-secret
+  annotations:
+    kubernetes.io/service-account.name: blacksyrius-sa
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: blacksyrius-sa
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: blacksyrius-clusterrole
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+  
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: blacksyrius-clusterrolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: blacksyrius-clusterrole
+subjects:
+- kind: ServiceAccount
+  name: blacksyrius-sa
+  namespace: test-1
+
